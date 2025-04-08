@@ -76,7 +76,15 @@ const Home = () => {
               partners.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="gap-2">
+              <Button
+                size="lg"
+                className="gap-2"
+                onClick={() =>
+                  document
+                    .getElementById("choose-path")
+                    ?.scrollIntoView({ behavior: "smooth" })
+                }
+              >
                 Get Started <ArrowRight className="h-4 w-4" />
               </Button>
               <Button variant="outline" size="lg">
@@ -100,7 +108,7 @@ const Home = () => {
       </section>
 
       {/* User Type Selection */}
-      <section className="container py-12 md:py-24">
+      <section id="choose-path" className="container py-12 md:py-24">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4">
             Choose Your Path
@@ -144,7 +152,12 @@ const Home = () => {
               </ul>
             </CardContent>
             <CardFooter>
-              <Button className="w-full">Access Commercial Dashboard</Button>
+              <Button
+                className="w-full"
+                onClick={() => (window.location.href = "/dashboard/commercial")}
+              >
+                Access Commercial Dashboard
+              </Button>
             </CardFooter>
           </Card>
 
@@ -180,7 +193,12 @@ const Home = () => {
               </ul>
             </CardContent>
             <CardFooter>
-              <Button className="w-full">Access Technical Dashboard</Button>
+              <Button
+                className="w-full"
+                onClick={() => (window.location.href = "/dashboard/technical")}
+              >
+                Access Technical Dashboard
+              </Button>
             </CardFooter>
           </Card>
 
@@ -216,7 +234,12 @@ const Home = () => {
               </ul>
             </CardContent>
             <CardFooter>
-              <Button className="w-full">Access Admin Dashboard</Button>
+              <Button
+                className="w-full"
+                onClick={() => (window.location.href = "/dashboard/admin")}
+              >
+                Access Admin Dashboard
+              </Button>
             </CardFooter>
           </Card>
         </div>
