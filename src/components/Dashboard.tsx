@@ -20,6 +20,7 @@ import {
   FileText,
   Settings,
   LogOut,
+  ArrowRight,
 } from "lucide-react";
 import CourseCard from "./CourseCard";
 
@@ -320,13 +321,33 @@ const Dashboard = ({
       <div className="flex-1 overflow-auto">
         {/* Header */}
         <header className="bg-background border-b border-border p-4 flex justify-between items-center sticky top-0 z-10">
-          <h1 className="text-2xl font-bold">
-            {activeTab === "overview" && "Dashboard Overview"}
-            {activeTab === "courses" && "My Courses"}
-            {activeTab === "achievements" && "My Achievements"}
-            {activeTab === "resources" && "Resource Library"}
-            {activeTab === "management" && "Content Management"}
-          </h1>
+          <div className="flex items-center space-x-4">
+            <div className="flex space-x-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => window.history.back()}
+              >
+                <ArrowRight className="h-4 w-4 rotate-180 mr-2" />
+                Back
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => (window.location.href = "/")}
+              >
+                <BookOpen className="h-4 w-4 mr-2" />
+                Home
+              </Button>
+            </div>
+            <h1 className="text-2xl font-bold">
+              {activeTab === "overview" && "Dashboard Overview"}
+              {activeTab === "courses" && "My Courses"}
+              {activeTab === "achievements" && "My Achievements"}
+              {activeTab === "resources" && "Resource Library"}
+              {activeTab === "management" && "Content Management"}
+            </h1>
+          </div>
           <div className="flex items-center space-x-4">
             <Button variant="outline" size="icon">
               <Bell className="h-4 w-4" />
