@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   ArrowLeft,
   BookOpen,
@@ -114,6 +115,7 @@ const CourseViewer = ({
   progress = 35,
   onBack = () => {},
 }: CourseViewerProps) => {
+  const { t } = useTranslation();
   const [activeModule, setActiveModule] = useState(modules[0]);
   const [activeContentIndex, setActiveContentIndex] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState<
@@ -187,7 +189,8 @@ const CourseViewer = ({
                 </div>
                 <div>
                   <Button variant="ghost" size="sm" className="text-white">
-                    <Download className="mr-1 h-4 w-4" /> Descargar
+                    <Download className="mr-1 h-4 w-4" />{" "}
+                    {t("courseViewer.download")}
                   </Button>
                 </div>
               </div>
@@ -204,13 +207,13 @@ const CourseViewer = ({
                   <h3 className="text-lg font-medium">{activeContent.title}</h3>
                 </div>
                 <Button variant="outline" size="sm">
-                  <Download className="mr-1 h-4 w-4" /> Descargar PDF
+                  <Download className="mr-1 h-4 w-4" />{" "}
+                  {t("courseViewer.download")} PDF
                 </Button>
               </div>
               <div className="bg-white p-4 rounded border border-gray-200 min-h-[400px] flex items-center justify-center">
                 <p className="text-gray-500">
-                  Vista previa del documento no disponible. Por favor, descargue
-                  el archivo para visualizarlo.
+                  {t("courseViewer.previewNotAvailable")}
                 </p>
               </div>
             </div>
@@ -270,10 +273,12 @@ const CourseViewer = ({
                 {showResults && (
                   <div className="mt-3 text-sm">
                     {selectedAnswers[question.id] === question.correctAnswer ? (
-                      <p className="text-green-600">¡Correcto!</p>
+                      <p className="text-green-600">
+                        {t("courseViewer.correct")}
+                      </p>
                     ) : (
                       <p className="text-red-600">
-                        Incorrecto. La respuesta correcta es:{" "}
+                        {t("courseViewer.incorrect")}{" "}
                         {question.options[question.correctAnswer]}
                       </p>
                     )}
@@ -283,12 +288,16 @@ const CourseViewer = ({
             ))}
             {!showResults && (
               <div className="mt-6">
-                <Button onClick={handleQuizSubmit}>Enviar respuestas</Button>
+                <Button onClick={handleQuizSubmit}>
+                  {t("courseViewer.submitAnswers")}
+                </Button>
               </div>
             )}
             {showResults && (
               <div className="mt-6">
-                <Button onClick={handleNextContent}>Continuar</Button>
+                <Button onClick={handleNextContent}>
+                  {t("courseViewer.continue")}
+                </Button>
               </div>
             )}
           </div>
@@ -304,11 +313,12 @@ const CourseViewer = ({
       <div className="border-b p-4">
         <div className="flex items-center justify-between">
           <Button variant="ghost" onClick={onBack}>
-            <ArrowLeft className="mr-2 h-4 w-4" /> Volver al dashboard
+            <ArrowLeft className="mr-2 h-4 w-4" />{" "}
+            {t("courseViewer.backToDashboard")}
           </Button>
           <div className="flex items-center space-x-4">
             <div className="text-sm text-muted-foreground">
-              Progreso del curso: {progress}%
+              {t("courseViewer.courseProgress")}: {progress}%
             </div>
             <Progress value={progress} className="w-32" />
           </div>
@@ -388,9 +398,15 @@ const CourseViewer = ({
           <Tabs defaultValue="content" className="h-full flex flex-col">
             <div className="border-b px-4">
               <TabsList>
-                <TabsTrigger value="content">Contenido</TabsTrigger>
-                <TabsTrigger value="notes">Mis notas</TabsTrigger>
-                <TabsTrigger value="resources">Recursos</TabsTrigger>
+                <TabsTrigger value="content">
+                  {t("courseViewer.content")}
+                </TabsTrigger>
+                <TabsTrigger value="notes">
+                  {t("courseViewer.myNotes")}
+                </TabsTrigger>
+                <TabsTrigger value="resources">
+                  {t("courseViewer.resources")}
+                </TabsTrigger>
               </TabsList>
             </div>
             <TabsContent value="content" className="flex-1 p-6 overflow-auto">
@@ -406,7 +422,8 @@ const CourseViewer = ({
                       modules.findIndex((m) => m.id === activeModule.id) === 0
                     }
                   >
-                    <ChevronLeft className="mr-1 h-4 w-4" /> Anterior
+                    <ChevronLeft className="mr-1 h-4 w-4" />{" "}
+                    {t("courseViewer.previous")}
                   </Button>
 
                   {!(activeContent.type === "quiz" && !showResults) && (
@@ -419,7 +436,8 @@ const CourseViewer = ({
                           modules.length - 1
                       }
                     >
-                      Siguiente <ChevronRight className="ml-1 h-4 w-4" />
+                      {t("courseViewer.next")}{" "}
+                      <ChevronRight className="ml-1 h-4 w-4" />
                     </Button>
                   )}
                 </div>
@@ -428,21 +446,21 @@ const CourseViewer = ({
             <TabsContent value="notes" className="flex-1 p-6 overflow-auto">
               <div className="max-w-4xl mx-auto">
                 <h3 className="text-lg font-medium mb-4">
-                  Mis notas para: {activeModule.title}
+                  {t("courseViewer.myNotesFor")}: {activeModule.title}
                 </h3>
                 <Textarea
-                  placeholder="Escribe tus notas aquí..."
+                  placeholder={t("courseViewer.writeNotesHere")}
                   className="min-h-[300px]"
                 />
                 <div className="mt-4 flex justify-end">
-                  <Button>Guardar notas</Button>
+                  <Button>{t("courseViewer.saveNotes")}</Button>
                 </div>
               </div>
             </TabsContent>
             <TabsContent value="resources" className="flex-1 p-6 overflow-auto">
               <div className="max-w-4xl mx-auto">
                 <h3 className="text-lg font-medium mb-4">
-                  Recursos adicionales
+                  {t("courseViewer.additionalResources")}
                 </h3>
                 <div className="space-y-4">
                   <Card>
@@ -460,7 +478,8 @@ const CourseViewer = ({
                           </div>
                         </div>
                         <Button variant="outline" size="sm">
-                          <Download className="mr-1 h-4 w-4" /> Descargar
+                          <Download className="mr-1 h-4 w-4" />{" "}
+                          {t("courseViewer.download")}
                         </Button>
                       </div>
                     </CardContent>
@@ -480,7 +499,8 @@ const CourseViewer = ({
                           </div>
                         </div>
                         <Button variant="outline" size="sm">
-                          <Download className="mr-1 h-4 w-4" /> Descargar
+                          <Download className="mr-1 h-4 w-4" />{" "}
+                          {t("courseViewer.download")}
                         </Button>
                       </div>
                     </CardContent>
@@ -500,7 +520,8 @@ const CourseViewer = ({
                           </div>
                         </div>
                         <Button variant="outline" size="sm">
-                          <Download className="mr-1 h-4 w-4" /> Descargar
+                          <Download className="mr-1 h-4 w-4" />{" "}
+                          {t("courseViewer.download")}
                         </Button>
                       </div>
                     </CardContent>

@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import {
   Card,
   CardContent,
@@ -35,6 +36,7 @@ const CourseCard = ({
   status = "not-started",
   onClick = () => console.log("Course card clicked"),
 }: CourseCardProps) => {
+  const { t } = useTranslation();
   return (
     <Card className="w-[350px] h-[280px] overflow-hidden flex flex-col bg-white">
       <div className="relative h-32 overflow-hidden">
@@ -66,7 +68,7 @@ const CourseCard = ({
 
         <div className="mt-2">
           <div className="flex justify-between text-xs mb-1">
-            <span>Progress</span>
+            <span>{t("courseCard.progress")}</span>
             <span>{progress}%</span>
           </div>
           <Progress value={progress} className="h-2" />
@@ -82,19 +84,19 @@ const CourseCard = ({
           {status === "not-started" && (
             <>
               <PlayCircle className="mr-2 h-4 w-4" />
-              Start Course
+              {t("courseCard.startCourse")}
             </>
           )}
           {status === "in-progress" && (
             <>
               <PlayCircle className="mr-2 h-4 w-4" />
-              Continue
+              {t("courseCard.continue")}
             </>
           )}
           {status === "completed" && (
             <>
               <RotateCcw className="mr-2 h-4 w-4" />
-              Review
+              {t("courseCard.review")}
             </>
           )}
         </Button>

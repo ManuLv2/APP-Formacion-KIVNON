@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import {
   ArrowRight,
   BookOpen,
@@ -20,8 +21,10 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 const Home = () => {
+  const { t } = useTranslation();
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
@@ -33,26 +36,27 @@ const Home = () => {
           </div>
           <nav className="hidden md:flex items-center gap-6">
             <Link to="/" className="text-sm font-medium hover:text-primary">
-              Home
+              {t("header.home")}
             </Link>
             <Link
               to="/about"
               className="text-sm font-medium hover:text-primary"
             >
-              About
+              {t("header.about")}
             </Link>
             <Link
               to="/contact"
               className="text-sm font-medium hover:text-primary"
             >
-              Contact
+              {t("header.contact")}
             </Link>
           </nav>
           <div className="flex items-center gap-4">
+            <LanguageSwitcher />
             <Button variant="outline" size="sm">
-              Sign In
+              {t("header.signIn")}
             </Button>
-            <Button size="sm">Register</Button>
+            <Button size="sm">{t("header.register")}</Button>
           </div>
         </div>
       </header>
@@ -67,13 +71,10 @@ const Home = () => {
             className="space-y-6"
           >
             <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
-              Dual-Track Training Platform
+              {t("hero.title")}
             </h1>
             <p className="text-xl text-muted-foreground">
-              A comprehensive learning management system with role-based access
-              that delivers automated courses, interactive assessments, and
-              certification tracking for both sales teams and technical
-              partners.
+              {t("hero.description")}
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Button
@@ -85,10 +86,10 @@ const Home = () => {
                     ?.scrollIntoView({ behavior: "smooth" })
                 }
               >
-                Get Started <ArrowRight className="h-4 w-4" />
+                {t("hero.getStarted")} <ArrowRight className="h-4 w-4" />
               </Button>
               <Button variant="outline" size="lg">
-                Learn More
+                {t("hero.learnMore")}
               </Button>
             </div>
           </motion.div>
@@ -111,11 +112,10 @@ const Home = () => {
       <section id="choose-path" className="container py-12 md:py-24">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4">
-            Choose Your Path
+            {t("choosePath.title")}
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Select your role to access personalized learning experiences
-            tailored to your specific needs.
+            {t("choosePath.description")}
           </p>
         </div>
 
@@ -125,29 +125,27 @@ const Home = () => {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Users className="h-5 w-5 text-primary" />
-                Commercial Team
+                {t("commercial.title")}
               </CardTitle>
-              <CardDescription>
-                Sales courses, interactive quizzes, and gamification elements
-              </CardDescription>
+              <CardDescription>{t("commercial.description")}</CardDescription>
             </CardHeader>
             <CardContent>
               <ul className="space-y-2 text-sm">
                 <li className="flex items-center gap-2">
                   <ChevronRight className="h-4 w-4 text-primary" />
-                  <span>Technical Training in AGV and AMR</span>
+                  <span>{t("commercial.item1")}</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <ChevronRight className="h-4 w-4 text-primary" />
-                  <span>CRM Training</span>
+                  <span>{t("commercial.item2")}</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <ChevronRight className="h-4 w-4 text-primary" />
-                  <span>Commercial Offer Preparation</span>
+                  <span>{t("commercial.item3")}</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <ChevronRight className="h-4 w-4 text-primary" />
-                  <span>Solutions and Services Training</span>
+                  <span>{t("commercial.item4")}</span>
                 </li>
               </ul>
             </CardContent>
@@ -156,7 +154,7 @@ const Home = () => {
                 className="w-full"
                 onClick={() => (window.location.href = "/dashboard/commercial")}
               >
-                Access Commercial Dashboard
+                {t("commercial.button")}
               </Button>
             </CardFooter>
           </Card>
@@ -166,29 +164,27 @@ const Home = () => {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Settings className="h-5 w-5 text-primary" />
-                Technical Partner
+                {t("technical.title")}
               </CardTitle>
-              <CardDescription>
-                Technical courses, resource library, and certification tracking
-              </CardDescription>
+              <CardDescription>{t("technical.description")}</CardDescription>
             </CardHeader>
             <CardContent>
               <ul className="space-y-2 text-sm">
                 <li className="flex items-center gap-2">
                   <ChevronRight className="h-4 w-4 text-primary" />
-                  <span>Advanced Technical Training</span>
+                  <span>{t("technical.item1")}</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <ChevronRight className="h-4 w-4 text-primary" />
-                  <span>Repair and Troubleshooting</span>
+                  <span>{t("technical.item2")}</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <ChevronRight className="h-4 w-4 text-primary" />
-                  <span>Resource Library Access</span>
+                  <span>{t("technical.item3")}</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <ChevronRight className="h-4 w-4 text-primary" />
-                  <span>Spare Parts Ordering</span>
+                  <span>{t("technical.item4")}</span>
                 </li>
               </ul>
             </CardContent>
@@ -197,7 +193,7 @@ const Home = () => {
                 className="w-full"
                 onClick={() => (window.location.href = "/dashboard/technical")}
               >
-                Access Technical Dashboard
+                {t("technical.button")}
               </Button>
             </CardFooter>
           </Card>
@@ -207,29 +203,27 @@ const Home = () => {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Settings className="h-5 w-5 text-primary" />
-                Administrator
+                {t("admin.title")}
               </CardTitle>
-              <CardDescription>
-                User management, content controls, and analytics
-              </CardDescription>
+              <CardDescription>{t("admin.description")}</CardDescription>
             </CardHeader>
             <CardContent>
               <ul className="space-y-2 text-sm">
                 <li className="flex items-center gap-2">
                   <ChevronRight className="h-4 w-4 text-primary" />
-                  <span>User Management</span>
+                  <span>{t("admin.item1")}</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <ChevronRight className="h-4 w-4 text-primary" />
-                  <span>Content Management</span>
+                  <span>{t("admin.item2")}</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <ChevronRight className="h-4 w-4 text-primary" />
-                  <span>Analytics and Reporting</span>
+                  <span>{t("admin.item3")}</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <ChevronRight className="h-4 w-4 text-primary" />
-                  <span>System Configuration</span>
+                  <span>{t("admin.item4")}</span>
                 </li>
               </ul>
             </CardContent>
@@ -238,7 +232,7 @@ const Home = () => {
                 className="w-full"
                 onClick={() => (window.location.href = "/dashboard/admin")}
               >
-                Access Admin Dashboard
+                {t("admin.button")}
               </Button>
             </CardFooter>
           </Card>
@@ -249,28 +243,26 @@ const Home = () => {
       <section className="container py-12 md:py-24 bg-muted/30 rounded-lg">
         <div className="mx-auto max-w-md space-y-6">
           <div className="text-center space-y-2">
-            <h2 className="text-3xl font-bold">Account Access</h2>
-            <p className="text-muted-foreground">
-              Sign in or create an account to access your personalized dashboard
-            </p>
+            <h2 className="text-3xl font-bold">{t("account.title")}</h2>
+            <p className="text-muted-foreground">{t("account.description")}</p>
           </div>
 
           <Tabs defaultValue="login" className="w-full">
             <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="login">Login</TabsTrigger>
-              <TabsTrigger value="register">Register</TabsTrigger>
+              <TabsTrigger value="login">{t("account.login")}</TabsTrigger>
+              <TabsTrigger value="register">
+                {t("account.register")}
+              </TabsTrigger>
             </TabsList>
             <TabsContent value="login" className="space-y-4">
               <Card>
                 <CardHeader>
-                  <CardTitle>Login</CardTitle>
-                  <CardDescription>
-                    Enter your credentials to access your account
-                  </CardDescription>
+                  <CardTitle>{t("login.title")}</CardTitle>
+                  <CardDescription>{t("login.description")}</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="space-y-2">
-                    <Label htmlFor="email">Email</Label>
+                    <Label htmlFor="email">{t("login.email")}</Label>
                     <Input
                       id="email"
                       type="email"
@@ -278,30 +270,32 @@ const Home = () => {
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="password">Password</Label>
+                    <Label htmlFor="password">{t("login.password")}</Label>
                     <Input id="password" type="password" />
                   </div>
                 </CardContent>
                 <CardFooter>
-                  <Button className="w-full">Sign In</Button>
+                  <Button className="w-full">{t("login.button")}</Button>
                 </CardFooter>
               </Card>
             </TabsContent>
             <TabsContent value="register" className="space-y-4">
               <Card>
                 <CardHeader>
-                  <CardTitle>Register</CardTitle>
-                  <CardDescription>
-                    Create a new account to access the platform
-                  </CardDescription>
+                  <CardTitle>{t("register.title")}</CardTitle>
+                  <CardDescription>{t("register.description")}</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="space-y-2">
-                    <Label htmlFor="register-name">Full Name</Label>
+                    <Label htmlFor="register-name">
+                      {t("register.fullName")}
+                    </Label>
                     <Input id="register-name" placeholder="John Doe" />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="register-email">Email</Label>
+                    <Label htmlFor="register-email">
+                      {t("register.email")}
+                    </Label>
                     <Input
                       id="register-email"
                       type="email"
@@ -309,25 +303,29 @@ const Home = () => {
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="register-password">Password</Label>
+                    <Label htmlFor="register-password">
+                      {t("register.password")}
+                    </Label>
                     <Input id="register-password" type="password" />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="user-type">User Type</Label>
+                    <Label htmlFor="user-type">{t("register.userType")}</Label>
                     <select
                       id="user-type"
                       className="w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
                     >
-                      <option value="commercial">Commercial Team</option>
-                      <option value="technical">Technical Partner</option>
-                      <option value="admin">
-                        Administrator (Requires Approval)
+                      <option value="commercial">
+                        {t("register.commercial")}
                       </option>
+                      <option value="technical">
+                        {t("register.technical")}
+                      </option>
+                      <option value="admin">{t("register.admin")}</option>
                     </select>
                   </div>
                 </CardContent>
                 <CardFooter>
-                  <Button className="w-full">Create Account</Button>
+                  <Button className="w-full">{t("register.button")}</Button>
                 </CardFooter>
               </Card>
             </TabsContent>
@@ -345,19 +343,20 @@ const Home = () => {
                 <span className="text-lg font-bold">TrainingHub</span>
               </div>
               <p className="text-sm text-muted-foreground">
-                A comprehensive learning management system with role-based
-                access for sales teams and technical partners.
+                {t("footer.description")}
               </p>
             </div>
             <div>
-              <h3 className="mb-4 text-sm font-semibold">Quick Links</h3>
+              <h3 className="mb-4 text-sm font-semibold">
+                {t("footer.quickLinks")}
+              </h3>
               <ul className="space-y-2 text-sm">
                 <li>
                   <Link
                     to="/"
                     className="text-muted-foreground hover:text-foreground"
                   >
-                    Home
+                    {t("header.home")}
                   </Link>
                 </li>
                 <li>
@@ -365,7 +364,7 @@ const Home = () => {
                     to="/about"
                     className="text-muted-foreground hover:text-foreground"
                   >
-                    About
+                    {t("header.about")}
                   </Link>
                 </li>
                 <li>
@@ -373,7 +372,7 @@ const Home = () => {
                     to="/contact"
                     className="text-muted-foreground hover:text-foreground"
                   >
-                    Contact
+                    {t("header.contact")}
                   </Link>
                 </li>
                 <li>
@@ -387,14 +386,16 @@ const Home = () => {
               </ul>
             </div>
             <div>
-              <h3 className="mb-4 text-sm font-semibold">Resources</h3>
+              <h3 className="mb-4 text-sm font-semibold">
+                {t("footer.resources")}
+              </h3>
               <ul className="space-y-2 text-sm">
                 <li>
                   <Link
                     to="/blog"
                     className="text-muted-foreground hover:text-foreground"
                   >
-                    Blog
+                    {t("footer.blog")}
                   </Link>
                 </li>
                 <li>
@@ -402,7 +403,7 @@ const Home = () => {
                     to="/documentation"
                     className="text-muted-foreground hover:text-foreground"
                   >
-                    Documentation
+                    {t("footer.documentation")}
                   </Link>
                 </li>
                 <li>
@@ -410,20 +411,22 @@ const Home = () => {
                     to="/support"
                     className="text-muted-foreground hover:text-foreground"
                   >
-                    Support
+                    {t("footer.support")}
                   </Link>
                 </li>
               </ul>
             </div>
             <div>
-              <h3 className="mb-4 text-sm font-semibold">Legal</h3>
+              <h3 className="mb-4 text-sm font-semibold">
+                {t("footer.legal")}
+              </h3>
               <ul className="space-y-2 text-sm">
                 <li>
                   <Link
                     to="/privacy"
                     className="text-muted-foreground hover:text-foreground"
                   >
-                    Privacy Policy
+                    {t("footer.privacy")}
                   </Link>
                 </li>
                 <li>
@@ -431,7 +434,7 @@ const Home = () => {
                     to="/terms"
                     className="text-muted-foreground hover:text-foreground"
                   >
-                    Terms of Service
+                    {t("footer.terms")}
                   </Link>
                 </li>
                 <li>
@@ -439,7 +442,7 @@ const Home = () => {
                     to="/cookies"
                     className="text-muted-foreground hover:text-foreground"
                   >
-                    Cookie Policy
+                    {t("footer.cookies")}
                   </Link>
                 </li>
               </ul>
@@ -447,7 +450,10 @@ const Home = () => {
           </div>
           <div className="mt-8 border-t pt-8 text-center text-sm text-muted-foreground">
             <p>
-              © {new Date().getFullYear()} TrainingHub. All rights reserved.
+              {t("footer.copyright").replace(
+                "{year}",
+                new Date().getFullYear().toString(),
+              )}
             </p>
           </div>
         </div>

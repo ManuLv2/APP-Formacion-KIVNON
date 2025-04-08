@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import {
   Card,
@@ -36,6 +37,7 @@ const Dashboard = ({
   userAvatar = "https://api.dicebear.com/7.x/avataaars/svg?seed=John",
 }: DashboardProps) => {
   const [activeTab, setActiveTab] = useState("overview");
+  const { t } = useTranslation();
 
   // Mock data for courses
   const commercialCourses = [
@@ -262,7 +264,7 @@ const Dashboard = ({
             onClick={() => setActiveTab("overview")}
           >
             <BarChart2 className="mr-2 h-4 w-4" />
-            Overview
+            {t("dashboard.overview")}
           </Button>
           <Button
             variant={activeTab === "courses" ? "default" : "ghost"}
@@ -270,7 +272,7 @@ const Dashboard = ({
             onClick={() => setActiveTab("courses")}
           >
             <BookOpen className="mr-2 h-4 w-4" />
-            Courses
+            {t("dashboard.courses")}
           </Button>
           <Button
             variant={activeTab === "achievements" ? "default" : "ghost"}
@@ -278,7 +280,7 @@ const Dashboard = ({
             onClick={() => setActiveTab("achievements")}
           >
             <Award className="mr-2 h-4 w-4" />
-            Achievements
+            {t("dashboard.achievements")}
           </Button>
           {userType === "technical" && (
             <Button
@@ -287,7 +289,7 @@ const Dashboard = ({
               onClick={() => setActiveTab("resources")}
             >
               <FileText className="mr-2 h-4 w-4" />
-              Resources
+              {t("dashboard.resources")}
             </Button>
           )}
           {userType === "admin" && (
@@ -297,7 +299,7 @@ const Dashboard = ({
               onClick={() => setActiveTab("management")}
             >
               <Settings className="mr-2 h-4 w-4" />
-              Content Management
+              {t("dashboard.management")}
             </Button>
           )}
         </div>
@@ -305,14 +307,14 @@ const Dashboard = ({
         <div className="mt-auto">
           <Button variant="ghost" className="w-full justify-start">
             <Settings className="mr-2 h-4 w-4" />
-            Settings
+            {t("dashboard.settings")}
           </Button>
           <Button
             variant="ghost"
             className="w-full justify-start text-destructive"
           >
             <LogOut className="mr-2 h-4 w-4" />
-            Logout
+            {t("dashboard.logout")}
           </Button>
         </div>
       </div>
@@ -329,7 +331,7 @@ const Dashboard = ({
                 onClick={() => window.history.back()}
               >
                 <ArrowRight className="h-4 w-4 rotate-180 mr-2" />
-                Back
+                {t("dashboard.back")}
               </Button>
               <Button
                 variant="outline"
@@ -337,15 +339,16 @@ const Dashboard = ({
                 onClick={() => (window.location.href = "/")}
               >
                 <BookOpen className="h-4 w-4 mr-2" />
-                Home
+                {t("dashboard.home")}
               </Button>
             </div>
             <h1 className="text-2xl font-bold">
-              {activeTab === "overview" && "Dashboard Overview"}
-              {activeTab === "courses" && "My Courses"}
-              {activeTab === "achievements" && "My Achievements"}
-              {activeTab === "resources" && "Resource Library"}
-              {activeTab === "management" && "Content Management"}
+              {activeTab === "overview" && t("dashboard.overview.title")}
+              {activeTab === "courses" && t("dashboard.courses.title")}
+              {activeTab === "achievements" &&
+                t("dashboard.achievements.title")}
+              {activeTab === "resources" && t("dashboard.resources.title")}
+              {activeTab === "management" && t("dashboard.management.title")}
             </h1>
           </div>
           <div className="flex items-center space-x-4">
@@ -372,9 +375,9 @@ const Dashboard = ({
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <Card>
                   <CardHeader className="pb-2">
-                    <CardTitle>Course Progress</CardTitle>
+                    <CardTitle>{t("dashboard.courseProgress")}</CardTitle>
                     <CardDescription>
-                      Your overall learning progress
+                      {t("dashboard.courseProgress.desc")}
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
@@ -390,8 +393,10 @@ const Dashboard = ({
 
                 <Card>
                   <CardHeader className="pb-2">
-                    <CardTitle>Completed Courses</CardTitle>
-                    <CardDescription>Courses you've finished</CardDescription>
+                    <CardTitle>{t("dashboard.completedCourses")}</CardTitle>
+                    <CardDescription>
+                      {t("dashboard.completedCourses.desc")}
+                    </CardDescription>
                   </CardHeader>
                   <CardContent>
                     <div className="text-3xl font-bold">
@@ -406,9 +411,9 @@ const Dashboard = ({
 
                 <Card>
                   <CardHeader className="pb-2">
-                    <CardTitle>Achievements</CardTitle>
+                    <CardTitle>{t("dashboard.achievements")}</CardTitle>
                     <CardDescription>
-                      Badges and certifications earned
+                      {t("dashboard.achievements.desc")}
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
@@ -427,7 +432,7 @@ const Dashboard = ({
               </div>
 
               <h2 className="text-xl font-semibold mt-8 mb-4">
-                Recommended Courses
+                {t("dashboard.recommendedCourses")}
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {courses.slice(0, 3).map((course) => (
@@ -446,7 +451,7 @@ const Dashboard = ({
               {userType !== "admin" && (
                 <>
                   <h2 className="text-xl font-semibold mt-8 mb-4">
-                    Leaderboard
+                    {t("dashboard.leaderboard")}
                   </h2>
                   <Card>
                     <CardContent className="p-0">
@@ -468,13 +473,16 @@ const Dashboard = ({
                             <div className="flex-grow">
                               <div className="font-medium">{user.name}</div>
                               <div className="text-sm text-muted-foreground">
-                                {user.name === userName ? "You" : "Team Member"}
+                                {user.name === userName
+                                  ? t("dashboard.leaderboard.you")
+                                  : t("dashboard.leaderboard.teamMember")}
                               </div>
                             </div>
                             <div className="flex items-center">
                               <Award className="h-4 w-4 mr-2 text-yellow-500" />
                               <span className="font-semibold">
-                                {user.points} pts
+                                {user.points}{" "}
+                                {t("dashboard.leaderboard.points")}
                               </span>
                             </div>
                           </div>
@@ -492,9 +500,15 @@ const Dashboard = ({
             <div className="space-y-6">
               <Tabs defaultValue="all">
                 <TabsList>
-                  <TabsTrigger value="all">All Courses</TabsTrigger>
-                  <TabsTrigger value="in-progress">In Progress</TabsTrigger>
-                  <TabsTrigger value="completed">Completed</TabsTrigger>
+                  <TabsTrigger value="all">
+                    {t("dashboard.allCourses")}
+                  </TabsTrigger>
+                  <TabsTrigger value="in-progress">
+                    {t("dashboard.inProgress")}
+                  </TabsTrigger>
+                  <TabsTrigger value="completed">
+                    {t("dashboard.completed")}
+                  </TabsTrigger>
                 </TabsList>
 
                 <TabsContent value="all" className="mt-6">
@@ -568,12 +582,12 @@ const Dashboard = ({
                     </CardHeader>
                     <CardContent>
                       <p className="text-sm text-muted-foreground">
-                        Earned on {achievement.date}
+                        {t("dashboard.earnedOn")} {achievement.date}
                       </p>
                     </CardContent>
                     <CardFooter>
                       <Button variant="outline" className="w-full">
-                        View Certificate
+                        {t("dashboard.viewCertificate")}
                       </Button>
                     </CardFooter>
                   </Card>
@@ -587,14 +601,16 @@ const Dashboard = ({
             <div className="space-y-6">
               <div className="flex justify-between items-center mb-6">
                 <div>
-                  <h2 className="text-xl font-semibold">Technical Resources</h2>
+                  <h2 className="text-xl font-semibold">
+                    {t("dashboard.technicalResources")}
+                  </h2>
                   <p className="text-muted-foreground">
-                    Access technical documentation and materials
+                    {t("dashboard.technicalResources.desc")}
                   </p>
                 </div>
                 <div className="flex space-x-2">
-                  <Button variant="outline">Filter</Button>
-                  <Button>Search</Button>
+                  <Button variant="outline">{t("dashboard.filter")}</Button>
+                  <Button>{t("dashboard.search")}</Button>
                 </div>
               </div>
 
@@ -602,10 +618,18 @@ const Dashboard = ({
                 <CardContent className="p-0">
                   <div className="divide-y divide-border">
                     <div className="grid grid-cols-12 p-4 font-medium text-muted-foreground">
-                      <div className="col-span-6">Name</div>
-                      <div className="col-span-2">Type</div>
-                      <div className="col-span-2">Size</div>
-                      <div className="col-span-2">Date</div>
+                      <div className="col-span-6">
+                        {t("dashboard.resource.name")}
+                      </div>
+                      <div className="col-span-2">
+                        {t("dashboard.resource.type")}
+                      </div>
+                      <div className="col-span-2">
+                        {t("dashboard.resource.size")}
+                      </div>
+                      <div className="col-span-2">
+                        {t("dashboard.resource.date")}
+                      </div>
                     </div>
 
                     {resources.map((resource) => (
@@ -638,14 +662,16 @@ const Dashboard = ({
             <div className="space-y-6">
               <div className="flex justify-between items-center mb-6">
                 <div>
-                  <h2 className="text-xl font-semibold">Content Management</h2>
+                  <h2 className="text-xl font-semibold">
+                    {t("dashboard.contentManagement")}
+                  </h2>
                   <p className="text-muted-foreground">
-                    Manage courses and resources
+                    {t("dashboard.contentManagement.desc")}
                   </p>
                 </div>
                 <div className="flex space-x-2">
-                  <Button variant="outline">Filter</Button>
-                  <Button>Add New Content</Button>
+                  <Button variant="outline">{t("dashboard.filter")}</Button>
+                  <Button>{t("dashboard.addNewContent")}</Button>
                 </div>
               </div>
 
@@ -653,11 +679,21 @@ const Dashboard = ({
                 <CardContent className="p-0">
                   <div className="divide-y divide-border">
                     <div className="grid grid-cols-12 p-4 font-medium text-muted-foreground">
-                      <div className="col-span-4">Title</div>
-                      <div className="col-span-2">Type</div>
-                      <div className="col-span-2">Status</div>
-                      <div className="col-span-2">Users</div>
-                      <div className="col-span-2">Completion</div>
+                      <div className="col-span-4">
+                        {t("dashboard.content.title")}
+                      </div>
+                      <div className="col-span-2">
+                        {t("dashboard.content.type")}
+                      </div>
+                      <div className="col-span-2">
+                        {t("dashboard.content.status")}
+                      </div>
+                      <div className="col-span-2">
+                        {t("dashboard.content.users")}
+                      </div>
+                      <div className="col-span-2">
+                        {t("dashboard.content.completion")}
+                      </div>
                     </div>
 
                     {adminContent.map((content) => (
